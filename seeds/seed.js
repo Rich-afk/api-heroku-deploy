@@ -5,7 +5,12 @@ const travellerSeedData = require('./travellerSeedData.json');
 const locationSeedData = require('./locationSeedData.json');
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+  try{
+    await sequelize.sync({ force: true });
+  } catch (error) {
+    console.log(error);
+  }
+  
 
   const travellers = await Traveller.bulkCreate(travellerSeedData);
 
