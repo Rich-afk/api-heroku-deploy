@@ -31,17 +31,14 @@ router.get('/api/locations/:id', async (req, res) => {
     {
       include: [{ 
         model: Traveller, 
-        through: Trip
+        through: {
+          attributes: []
+        }
       }]
     }
   );
-  const location = JSON.parse(JSON.stringify(locationData));
-
-  location.travellers.forEach(traveller => {
-      delete traveller.trip;
-  });
  
-  res.json(location);
+  res.json(locationData);
 });
 
 // TRIPS
